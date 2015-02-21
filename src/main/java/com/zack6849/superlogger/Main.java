@@ -206,7 +206,7 @@ public class Main extends JavaPlugin {
             getLogger().info("Creating new LoggerAbstraction for LoggingCategory." + category.toString());
             LoggerAbstraction log = new LoggerAbstraction();
             try {
-                log.setFile(new File(getDataFolder() + File.separator + "logs" + File.separator + getMonth() + File.separator + getDay() + File.separator + filename));
+                log.setFile(new File(getDataFolder() + File.separator + "logs" + File.separator + getYear() + File.separator + getMonth() + File.separator + getDay() + File.separator + filename));
                 log.setWriter(new BufferedWriter(new FileWriter(log.getFile(), true)));
                 log.setCategory(category);
             } catch (IOException e) {
@@ -262,6 +262,10 @@ public class Main extends JavaPlugin {
 
     private String getTime() {
         return String.format("[%tm/%<td/%<ty - %<tH:%<tM:%<tS] ", new Date());
+    }
+
+    private String getYear() {
+        return String.format("%tY", new Date());
     }
 
     private String getMonth() {
