@@ -202,21 +202,22 @@ public class Main extends JavaPlugin {
 
     public LoggerAbstraction getFile(LoggingCategory category) {
         String filename = category.getFileName();
-        if (!loggers.containsKey(filename)) {
+        String key = getYear() + File.separator + getMonth() + File.separator + getDay() + File.separator + filename;
+        if (!loggers.containsKey(key)) {
             getLogger().info("Creating new LoggerAbstraction for LoggingCategory." + category.toString());
             LoggerAbstraction log = new LoggerAbstraction();
             try {
-                log.setFile(new File(getDataFolder() + File.separator + "logs" + File.separator + getYear() + File.separator + getMonth() + File.separator + getDay() + File.separator + filename));
+                log.setFile(new File(getDataFolder() + File.separator + "logs" + File.separator + key));
                 log.setWriter(new BufferedWriter(new FileWriter(log.getFile(), true)));
                 log.setCategory(category);
             } catch (IOException e) {
                 logger.severe("Error setting up logger for " + filename + "!");
                 logger.severe(e.getMessage());
             }
-            loggers.put(filename, log);
+            loggers.put(key, log);
             return log;
         } else {
-            return loggers.get(filename);
+            return loggers.get(key);
         }
     }
 
