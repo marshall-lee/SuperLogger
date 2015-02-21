@@ -265,7 +265,7 @@ public class Main extends JavaPlugin {
     }
 
     private String getMonth() {
-        return String.format("%tb", new Date());
+        return String.format("%tm", new Date());
     }
 
     private String getDay() {
