@@ -26,7 +26,8 @@ public enum LoggingCategory {
     JOIN("connections.log"),
     KICK("connections.log"),
     QUIT("connections.log"),
-    FAILED_LOGIN("connections.log");
+    FAILED_LOGIN("connections.log"),
+    DYNMAP("dynmap.log");
 
     private String name;
 
