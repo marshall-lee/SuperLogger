@@ -24,6 +24,7 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.dynmap.DynmapWebChatEvent;
 import org.bukkit.event.player.*;
 
 public class EventListener implements Listener {
@@ -59,6 +60,16 @@ public class EventListener implements Listener {
             line.append(String.format("at (%s, %s, %s) in world '%s' ", loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), loc.getWorld().getName()));
         }
         line.append(": ").append(event.getMessage());
+        plugin.log(line.toString(), category);
+    }
+
+    @EventHandler
+    public void onDynmapWebChatMessage(DynmapWebChatEvent event) {
+        LoggingCategory category = plugin.getSettings().isUseOldLogging() ? LoggingCategory.ALL : LoggingCategory.DYNMAP;
+        StringBuilder line = new StringBuilder();
+        line.append(event.getName()).append(" ");
+        line.append(String.format("(%s) ", event.getSource()));
+        line.append(event.getMessage()).append(" ");
         plugin.log(line.toString(), category);
     }
 
